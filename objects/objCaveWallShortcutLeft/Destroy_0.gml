@@ -1,0 +1,1 @@
+with linkWall instance_destroy();
