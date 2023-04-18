@@ -1,0 +1,1 @@
+with objCaveWallShortcutLeft instance_destroy();

@@ -1,0 +1,1 @@
+linkWall = instance_create_layer(objCaveWallShortcutLeft.x, objCaveWallShortcutLeft.y, "Instances", objWallA);
