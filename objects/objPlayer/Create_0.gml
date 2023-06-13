@@ -11,12 +11,15 @@
  * j = Jump
  * a = attack
  * i = invulnerability
+ * d = dash
  *
  * Note, most params are declared under "Variable Definitions" for sake of brevity
  */
  
- // Additional Movement Params
+ // Additional Movement Params 
 grav = 0.25; // For gravity control (ex underwater)
+barHPxPos = (160/2) - (barHPWidth/2);
+barHPyPos = window_get_height() - (window_get_height()-10);
 
 // States
 stateOpen = function() // Default state
@@ -29,6 +32,19 @@ stateOpen = function() // Default state
 		vSpeed = jSpeed;
 		jGrnd = 0;
 	}
+	
+	if(dFlag) // Available when Dash is collected
+	{
+		dTime = max(dTime-1, 0);
+		if(dTime > 0)
+			vSpeed = 0;
+		if(kDash)
+		{
+			dTime = 8;
+			hSpeed = -image_xscale * dDist;
+		}
+	}
+		
 	
 	// Collision & Movement (if available)
 	if(place_meeting(x+hSpeed, y, objWall)) // Horizontal
@@ -46,7 +62,9 @@ stateOpen = function() // Default state
 	if(place_meeting(x, y+vSpeed, objWall)) // Vertical
 	{
 		if(vSpeed > 0)
-			jGrnd = 5; // Time buffer after you go off platform
+		{
+			jGrnd = 5; // Time buffer after you go off platform 
+		}
 		while(abs(vSpeed) > 0.1)
 		{
 			vSpeed *= 0.5;

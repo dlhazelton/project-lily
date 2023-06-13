@@ -1,4 +1,4 @@
-/// @description Management
+ /// @description Management
 
 // Updates camera on what to follow
 if(instance_exists(following))
